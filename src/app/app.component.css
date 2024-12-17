@@ -1,0 +1,21 @@
+.title-app{
+    text-align: center;
+}
+
+.form-task{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.task-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+ 
+}
+
+.completed-task{
+    text-decoration: line-through;
+}

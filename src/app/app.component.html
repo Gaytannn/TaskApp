@@ -1,0 +1,23 @@
+<h1 class="title-app">{{title}}</h1>
+
+<div class="form-task">
+
+    <input type="text" placeholder="Ingresa una Tarea" [(ngModel)]="taskTitle">
+    <button (click)="AddTask()">Guardar</button>
+    <span [hidden]="taskTitleValid">Ingresa un titulo</span>
+</div>
+
+@for (task of tasks(); track task.Id) {
+
+    <div class="task-item">
+        <input type="checkbox" [checked]="task.Completed" (change)="CompletedTask(task.Id)">
+        <p [ngClass]="{'completed-task': task.Completed}">{{ task.Title }}</p>
+        <button (click)="DeleteTask(task.Id)">Eliminar</button>
+    </div>
+   
+    
+}
+
+<span>Total de Tareas : {{ totalTask()}}</span>
+
+
