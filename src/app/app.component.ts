@@ -1,10 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 
 import { TaskService } from './services/task.service';
-import { TasK } from './model/Task.model';
+import { Prioridad, TasK } from './model/Task.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormTaskComponent } from "./components/form-task/form-task.component";
+import { FormRequest } from './model/FormRequest.model';
 
 
 @Component({
@@ -22,25 +23,42 @@ export class AppComponent implements OnInit {
   Open : boolean=false;
 
 
+  taskEdit!:TasK|null;
+
+
   
  
 
   taskService = inject(TaskService);
 
   ngOnInit(): void {
-    this.tasks=this.taskService.GetAllTaskAsync();
+   
+    this.tasks =this.taskService.GetAllTaskAsync();
   }
 
   totalTask = this.taskService.TotalTasks;
 
 
-  AddTask(title:string){
+  AddTask(request:FormRequest){
 
-    if(title.trim()==''){
+
+   
+
+
+    if(request.Title.trim()==''){
       this.taskTitleValid=false;
       return
     }
-    this.taskService.AddTaskAsync(title);
+
+    if(request?.Id)
+    {
+      this.taskService.UpdateTaskAsync(request.Id, request.Title,request.Prioridad);
+      
+    }else{
+      this.taskService.AddTaskAsync(request.Title,request.Prioridad);
+    }
+
+   
     this.taskTitleValid=true;
     this.Open=false;
    
@@ -50,6 +68,12 @@ export class AppComponent implements OnInit {
     this.taskService.DeleteTaskAsync(id);
   }
 
+
+  EditTask(task:TasK){
+    this.taskEdit = { ...task }; // Hacemos una copia para evitar modificar directamente la tarea
+    this.Open = true;
+  }
+
   CompletedTask(id:number){
     this.taskService.CompletedTaskAsync(id);
   
@@ -57,14 +81,29 @@ export class AppComponent implements OnInit {
     
   }
 
+  filter(priority: string | '') {
+  
+    if (priority === '') {
+      this.tasks = this.taskService.GetAllTaskAsync();
+    } else {
+      // Convertir la cadena a enum y filtrar
+      const prioridadEnum = priority as Prioridad; // Convertir a tipo `Prioridad`
+      this.tasks = this.taskService.FilterTasksAsync({ prioridad: prioridadEnum });
+      
+    }
+
+  }
+  
+
   OpenForm(){
     this.Open=true;
   }
 
   CloseForm(open :boolean){
 
-    console.log(open);
+  
     this.Open=false;
+    this.taskEdit = null;
   }
   
 }

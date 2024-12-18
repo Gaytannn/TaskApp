@@ -13,17 +13,18 @@ export class TaskService {
   TotalTasks = computed(()=>this.tasks().length);
   jsConffeti = new JSConfetti();
 
+  tasksMemory!:TasK[];
+
+
   constructor() {
 
     const taskNameStorage = 'Tasks';
-
-    
     const storage = localStorage.getItem(taskNameStorage);
-  
     if (storage != null) {
     
       const tasksFromStorage = JSON.parse(storage);
-      this.tasks.set(tasksFromStorage);
+      this.tasksMemory=tasksFromStorage;
+      // this.tasks.set(tasksFromStorage);
     } else {
     
       const tasksJson = JSON.stringify(this.tasks());
@@ -35,21 +36,48 @@ export class TaskService {
   
 
 
-  GetAllTaskAsync(){
+  GetAllTaskAsync()
+  {
+
+    this.tasks.set(this.tasksMemory);
     return this.tasks;
   }
 
-  AddTaskAsync(title:string){
+  FilterTasksAsync(filter: { title?: string; prioridad: Prioridad; completed?: boolean }) {
+    const tasks = [...this.tasksMemory]
+    
+    const tasksFilter = tasks.filter(t=>t.Prioridad==filter.prioridad)
+
+    this.tasks.set(tasksFilter);
+
+    return this.tasks;
+
+    
+   
+  }
+  
+
+  AddTaskAsync(title:string,prioridad:Prioridad){
     const newTask = {
       Id:Date.now(),
       Title:title,
-      Prioridad:Prioridad.Baja,
+      Prioridad:prioridad,
       Completed:false,
     }
 
     this.tasks.update( tasks => [...tasks,newTask])
     this.updateLocalStorage();
 
+  }
+
+
+  UpdateTaskAsync(id:number,title:string,prioridad:Prioridad){
+    const task = this.tasks().find(task => task.Id==id)
+    if(task){
+      task.Title=title
+      task.Prioridad=prioridad
+      this.updateLocalStorage();
+    }
   }
 
 

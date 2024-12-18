@@ -14,6 +14,9 @@
         @if (hasError('title','required')) {
            <span class="error">El titulo es requerido</span> 
         }
+        @if (hasError('title','minlength')) {
+          <span class="error">El título debe tener al menos 4 caracteres</span> 
+       }
     </div>
 
     <div class="input-container">
