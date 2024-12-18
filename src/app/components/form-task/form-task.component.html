@@ -1,0 +1,41 @@
+<form [formGroup]="TaskForm" (ngSubmit)="Submit()">
+
+
+ 
+    <h2>{{titleForm}}</h2>
+
+
+    
+    <div class="input-container">      
+      
+        <label for="title">Title</label> 
+        <input type="text" id="title" formControlName="title" placeholder="Enter a title" />
+
+        @if (hasError('title','required')) {
+           <span class="error">El titulo es requerido</span> 
+        }
+    </div>
+
+    <div class="input-container">
+      <label for="prioridad">Priority</label>
+      <select formControlName="prioridad" name="prioridad" id="prioridad">
+        <option value="" disabled selected>Select a priority</option>
+        @for (prioridad of Prioridades; track prioridad) {
+          <option value="{{prioridad}}">{{prioridad.toString()}}</option>
+        }
+      </select>
+      @if (hasError('prioridad', 'required')) {
+        <p class="error-message">Debes seleccionar una prioridad</p>
+      }
+    </div>
+
+
+    <div class="button-container">
+      <button class="button btn-save" type="submit">Save</button>
+      <button class="button btn-close" type="button" (click)="CloseFormTask()">Close</button>
+    </div>
+        
+  
+</form>
+  
+

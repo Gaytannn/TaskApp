@@ -1,0 +1,47 @@
+form{
+    display: flex
+    ;
+        flex-direction: column;
+        gap: 1rem;
+}
+
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.button-container{
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+    
+    cursor: pointer;
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    padding: 0.425rem 1rem;
+    color: rgb(242 242 242);
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  
+  }
+
+  .btn-save{
+    background-color: rgb(79 70 229);
+    background: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  }
+
+  .btn-close{
+    background-color: rgb(229, 70, 70); /* Color base */
+    background: linear-gradient(144deg, #e94545, #ff6b6b 50%, #ff8a80); /* Degradado en tonos rojos */
+  }
+

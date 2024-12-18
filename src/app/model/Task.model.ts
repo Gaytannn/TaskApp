@@ -9,7 +9,7 @@ export interface TasK{
 }
 
 export enum Prioridad{
-    Baja,
-    Media,
-    Alta
+    Baja='Baja',
+    Media='Media',
+    Alta='Alta'
 }
