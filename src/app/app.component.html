@@ -1,11 +1,24 @@
 <h1 class="title-app">{{title}}</h1>
 
+
+@if (Open) {
+    <div  class="modal-overlay">
+        <div class="modal-content">
+          <app-form-task (SaveForm)="AddTask($event)" (CloseForm)="CloseForm($event)"></app-form-task>
+        </div>
+    </div>
+}
+
+
+
+<!-- 
+
 <div class="form-task">
 
     <input type="text" placeholder="Ingresa una Tarea" [(ngModel)]="taskTitle">
     <button (click)="AddTask()">Guardar</button>
     <span [hidden]="taskTitleValid">Ingresa un titulo</span>
-</div>
+</div> -->
 
 @for (task of tasks(); track task.Id) {
 
@@ -18,6 +31,31 @@
     
 }
 
-<span>Total de Tareas : {{ totalTask()}}</span>
+<div>
+    <span>Total de Tareas : {{ totalTask()}}</span>
+</div>
+
+
+
+
+
+
+<button class="button" (click)="OpenForm()">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1.25rem"
+    height="1.25rem"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+  >
+    <path d="M12 19v-7m0 0V5m0 7H5m7 0h7"></path>
+  </svg>
+  Create
+</button>
+
 
 

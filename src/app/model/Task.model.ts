@@ -1,4 +1,4 @@
-import { Timestamp } from "rxjs";
+
 
 export interface TasK{
     Id:number,
@@ -9,7 +9,7 @@ export interface TasK{
 }
 
 export enum Prioridad{
-    'Baja',
-    'Media',
-    'Alta'
+    Baja='Baja',
+    Media='Media',
+    Alta='Alta'
 }
