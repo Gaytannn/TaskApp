@@ -4,7 +4,7 @@
 @if (Open) {
     <div  class="modal-overlay">
         <div class="modal-content">
-          <app-form-task (SaveForm)="AddTask($event)" (CloseForm)="CloseForm($event)"></app-form-task>
+          <app-form-task  [Task]="taskEdit" (SaveForm)="AddTask($event)" (CloseForm)="CloseForm($event)"></app-form-task>
         </div>
     </div>
 }
@@ -24,15 +24,23 @@
 
     <div class="task-item">
         <input type="checkbox" [checked]="task.Completed" (change)="CompletedTask(task.Id)">
-        <p [ngClass]="{'completed-task': task.Completed}">{{ task.Title }}</p>
-        <button (click)="DeleteTask(task.Id)">Eliminar</button>
+        <p [ngClass]="{'completed-task': task.Completed}">{{ task.Title }}</p> 
+        <span>{{task.Prioridad}}</span>
+        <button (click)="DeleteTask(task.Id)">Delete</button>
+        <button (click)="EditTask(task)">Edit</button>
     </div>
    
     
 }
 
-<div>
-    <span>Total de Tareas : {{ totalTask()}}</span>
+<div class="container-filter">
+    <span>Total Tasks: {{ totalTask()}}</span>
+    <div>
+      <button (click)="filter('')">All</button>
+      <button (click)="filter('Baja')">Low</button>
+      <button (click)="filter('Media')">Medium</button>
+      <button (click)="filter('Alta')">High</button>
+    </div>
 </div>
 
 
