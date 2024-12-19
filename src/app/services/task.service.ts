@@ -10,10 +10,10 @@ export class TaskService {
 
   taskNameStorage = 'Tasks'
   tasks = signal<TasK[]>([]);
-  TotalTasks = computed(()=>this.tasks().length);
+  tasksMemory!:TasK[];
   jsConffeti = new JSConfetti();
 
-  tasksMemory!:TasK[];
+  
 
 
   constructor() {
@@ -24,7 +24,8 @@ export class TaskService {
     
       const tasksFromStorage = JSON.parse(storage);
       this.tasksMemory=tasksFromStorage;
-      // this.tasks.set(tasksFromStorage);
+      this.tasks.set(this.tasksMemory);
+      
     } else {
     
       const tasksJson = JSON.stringify(this.tasks());
@@ -59,20 +60,19 @@ export class TaskService {
 
   AddTaskAsync(title:string,prioridad:Prioridad){
     const newTask = {
-      Id:Date.now(),
-      Title:title,
-      Prioridad:prioridad,
-      Completed:false,
-    }
-
-    this.tasks.update( tasks => [...tasks,newTask])
+      Id: Date.now(),
+      Title: title,
+      Prioridad: prioridad,
+      Completed: false,
+    };
+    this.tasksMemory = [...this.tasksMemory, newTask]; // Crear un nuevo array
     this.updateLocalStorage();
 
   }
 
 
   UpdateTaskAsync(id:number,title:string,prioridad:Prioridad){
-    const task = this.tasks().find(task => task.Id==id)
+    const task = this.tasksMemory.find(task => task.Id==id)
     if(task){
       task.Title=title
       task.Prioridad=prioridad
@@ -82,13 +82,15 @@ export class TaskService {
 
 
   DeleteTaskAsync(id:number){
-    const updatedTasks = this.tasks().filter((task) => task.Id !== id);
-    this.tasks.set(updatedTasks);
+
+    this.tasksMemory = this.tasksMemory.filter((task) => task.Id !== id);
+    // const updatedTasks = this.tasks().filter((task) => task.Id !== id);
+  
     this.updateLocalStorage();
   }
 
   CompletedTaskAsync(id:number){
-    const task = this.tasks().find(task => task.Id==id)
+    const task = this.tasksMemory.find(task => task.Id==id)
     if(task){
       const statusTask = task.Completed;
       task.Completed = !statusTask ;
@@ -98,8 +100,15 @@ export class TaskService {
   }
 
   private updateLocalStorage() {
-    const tasksJson = JSON.stringify(this.tasks());
+    const tasksJson = JSON.stringify(this.tasksMemory);
     localStorage.setItem(this.taskNameStorage, tasksJson);
+
+    this.tasks.set(this.tasksMemory);
+
+    
+    
+    
+  
   }
   
 }

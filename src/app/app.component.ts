@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 
 import { TaskService } from './services/task.service';
 import { Prioridad, TasK } from './model/Task.model';
@@ -14,37 +14,30 @@ import { FormRequest } from './model/FormRequest.model';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'TaskApp';
 
-  tasks = signal<TasK[]>([]);
+ 
   taskTitle :string ='';
   taskTitleValid :boolean=true;
   Open : boolean=false;
-
-
   taskEdit!:TasK|null;
 
 
   
- 
+  tasks = inject(TaskService).tasks;
+  private taskService = inject(TaskService);
+  totalTask = computed(() => this.tasks().length);
 
-  taskService = inject(TaskService);
-
-  ngOnInit(): void {
+  // ngOnInit(): void {
    
-    this.tasks =this.taskService.GetAllTaskAsync();
-  }
+  //   this.tasks =this.taskService.GetAllTaskAsync();
+  // }
 
-  totalTask = this.taskService.TotalTasks;
+ 
 
 
   AddTask(request:FormRequest){
-
-
-   
-
-
     if(request.Title.trim()==''){
       this.taskTitleValid=false;
       return
@@ -61,6 +54,9 @@ export class AppComponent implements OnInit {
    
     this.taskTitleValid=true;
     this.Open=false;
+
+
+  
    
   }
 
@@ -76,9 +72,6 @@ export class AppComponent implements OnInit {
 
   CompletedTask(id:number){
     this.taskService.CompletedTaskAsync(id);
-  
-
-    
   }
 
   filter(priority: string | '') {

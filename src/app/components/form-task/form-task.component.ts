@@ -36,12 +36,7 @@ export class FormTaskComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-    
-   
     this.Prioridades = this.prioridadService.GetAllAsync();
-
-   
     this.titleForm = this.Task ? 'Edit Task' : 'New Task';
 
   
@@ -56,6 +51,7 @@ export class FormTaskComponent implements OnInit {
  
   CloseFormTask() {
   
+    this.Task=null;
     this.CloseForm.emit(false);
    
   }
@@ -81,6 +77,7 @@ export class FormTaskComponent implements OnInit {
 
     // Reiniciar el formulario
     this.TaskForm.reset();
+    this.CloseForm.emit(false);
   }
 
   // Verifica si un control tiene errores
