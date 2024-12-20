@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormTaskComponent } from "./components/form-task/form-task.component";
 import { FormRequest } from './model/FormRequest.model';
+import { TaskItemComponent } from "./components/task-item/task-item.component";
 
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, CommonModule, FormTaskComponent],
+  imports: [FormsModule, CommonModule, FormTaskComponent, TaskItemComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -60,8 +61,8 @@ export class AppComponent {
    
   }
 
-  DeleteTask(id:number){
-    this.taskService.DeleteTaskAsync(id);
+  DeleteTask(task:TasK){
+    this.taskService.DeleteTaskAsync(task.Id);
   }
 
 
@@ -70,8 +71,8 @@ export class AppComponent {
     this.Open = true;
   }
 
-  CompletedTask(id:number){
-    this.taskService.CompletedTaskAsync(id);
+  CompletedTask(task:TasK){
+    this.taskService.CompletedTaskAsync(task.Id);
   }
 
   filter(priority: string | '') {

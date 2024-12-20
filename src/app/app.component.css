@@ -12,18 +12,20 @@
     justify-content: center;
     gap: 10px;
 }
-
+/* 
 .task-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+ 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 400px;
+  margin: auto;
  
 }
 
 .completed-task{
     text-decoration: line-through;
-}
+} */
 
 /* Estilos del contenedor del modal */
 .modal-overlay {
@@ -88,3 +90,4 @@
   align-items: center;
   gap: 1rem;
 }
+
