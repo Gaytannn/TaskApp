@@ -1,0 +1,136 @@
+
+
+.task-item {
+    max-width: 400px;
+    display: flex; /* Alineación en fila */
+    align-items: center; /* Alineación vertical */
+    justify-content: space-between; /* Espaciado entre los extremos */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde para distinguir tareas */
+    border-radius: 5px; /* Bordes redondeados */
+    margin: 16px auto; /* Separación entre elementos */
+    background-color: #f9f9f9; /* Fondo claro */
+  }
+  
+  .task-item input[type="checkbox"] {
+    margin-right: 10px; /* Espaciado entre el checkbox y el título */
+  }
+  
+  .task-item p {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    margin: 0; /* Elimina márgenes */
+  }
+  
+  .task-item span {
+    margin-left: 10px; /* Espaciado entre el título y la prioridad */
+    padding: 2px 6px; /* Espaciado interno */
+    border-radius: 4px; /* Bordes redondeados */
+   
+    font-size: 0.9em; /* Ajuste de tamaño */
+  }
+  
+  .task-item div {
+    display: flex; /* Los botones se alinean en fila */
+    gap: 5px; /* Espaciado entre botones */
+    margin-left: 10px;
+  }
+  
+  /* .task-item button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; 
+    color: white; 
+    cursor: pointer; 
+  } */
+  
+  /* .task-item button:hover {
+    background-color: #0056b3; 
+  } */
+
+  
+.completed-task {
+  text-decoration: line-through; /* Tacha el texto de tareas completadas */
+  color: #6c757d; /* Color gris */
+}
+
+/* From Uiverse.io by aaronross1 */ 
+.button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(134, 134, 134);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+
+
+.button-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.button-svgIcon path {
+  fill: white;
+}
+
+.button-delete:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+.button-edit:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(88, 44, 246);
+  align-items: center;
+}
+
+.button:hover .button-svgIcon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.button-delete::before {
+  display: none;
+  content: "Delete";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.button-edit::before {
+  display: none;
+  content: "Edit";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.button:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}

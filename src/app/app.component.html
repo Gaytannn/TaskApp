@@ -10,7 +10,6 @@
 }
 
 
-
 <!-- 
 
 <div class="form-task">
@@ -22,14 +21,25 @@
 
 @for (task of tasks(); track task.Id) {
 
-    <div class="task-item">
+  <app-task-item [task]="task"
+    (changeCheckBox)="CompletedTask($event)"
+    (delete)="DeleteTask($event)"
+    (edit)="EditTask($event)"
+  
+  />
+
+    <!-- <div class="task-item">
         <input type="checkbox" [checked]="task.Completed" (change)="CompletedTask(task.Id)">
         <p [ngClass]="{'completed-task': task.Completed}">{{ task.Title }}</p> 
         <span>{{task.Prioridad}}</span>
-        <button (click)="DeleteTask(task.Id)">Delete</button>
-        <button (click)="EditTask(task)">Edit</button>
+
+        <div>
+          <button (click)="DeleteTask(task.Id)">Delete</button>
+          <button (click)="EditTask(task)">Edit</button>
+        </div>
+       
     </div>
-   
+    -->
     
 }
 
